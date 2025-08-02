@@ -1,0 +1,21 @@
+# Bỏ qua các file log
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Bỏ qua thư mục chứa các thư viện đã cài đặt
+node_modules
+
+# Bỏ qua file biến môi trường - RẤT QUAN TRỌNG!
+.env
+
+# Bỏ qua các file hệ thống của macOS và Windows
+.DS_Store
+Thumbs.db
+
+# Bỏ qua các thư mục của trình soạn thảo code
+.vscode/
+.idea/
