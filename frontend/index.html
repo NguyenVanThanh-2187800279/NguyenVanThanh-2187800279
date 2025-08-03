@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Quản lý Đồ án</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- frontend/index.html -->
+<header>
+    <div class="container header-container">
+        
+        <!-- Phần 1: Thông tin người dùng (bên trái) -->
+        <div class="user-info">
+            <h2>Chào mừng, <span id="user-fullname"></span>!</h2>
+            <p>Vai trò: <strong id="user-role"></strong></p>
+        </div>
+        
+        <!-- Phần 2: Các nút hành động (bên phải) -->
+        <div class="header-actions">
+            
+            <!-- Link đến trang Admin (sẽ được hiển thị bằng JS nếu là admin) -->
+            <a href="admin.html" id="admin-link" class="btn hidden">Bảng quản trị</a>
+            
+            <!-- Vùng chứa chuông và danh sách thông báo -->
+            <div class="notification-container">
+                <button id="notification-bell" class="notification-bell">
+                    🔔 <!-- Biểu tượng chuông -->
+                    <span id="notification-count" class="notification-count hidden">0</span>
+                </button>
+                <div id="notification-panel" class="notification-panel hidden">
+                    <!-- JavaScript sẽ điền thông báo vào đây -->
+                </div>
+            </div>
+            
+            <!-- Nút Đăng xuất -->
+            <button id="logout-btn" class="btn btn-danger">Đăng xuất</button>
+
+        </div>
+    </div>
+</header>
+
+    <main class="container">
+        <!-- Khu vực này chỉ hiển thị cho Giảng viên -->
+        <section id="lecturer-section" class="hidden">
+            <h3>Tạo đề tài mới</h3>
+            <form id="create-topic-form">
+                <div class="form-group">
+                    <label for="topic-title">Tên đề tài</label>
+                    <input type="text" id="topic-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="topic-description">Mô tả chi tiết</label>
+                    <textarea id="topic-description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn">Tạo mới</button>
+            </form>
+                    <hr> <!-- Thêm một đường kẻ ngang để phân tách -->
+
+        <!-- ================== KHU VỰC MỚI ================== -->
+        <div class="pending-section">
+            <h3>Danh sách sinh viên chờ duyệt</h3>
+            <div id="pending-registrations-list">
+                <!-- JavaScript sẽ đổ danh sách chờ duyệt vào đây -->
+                <!-- Ví dụ một dòng:
+                <div class="pending-item">
+                    <p>SV. Trần Thị An đã đăng ký đề tài "Xây dựng ứng dụng Chat Real-time"</p>
+                    <div class="actions">
+                        <button class="btn btn-success" data-id="1" data-action="approved">Duyệt</button>
+                        <button class="btn btn-danger" data-id="1" data-action="rejected">Từ chối</button>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+        <!-- ================================================== -->
+        </section>
+        <!-- Modal hiển thị chi tiết tiến độ trao đổi -->
+         <div id="lecturer-progress-modal" class="modal hidden">
+        <div class="modal-content large"> <!-- Thêm class 'large' để modal rộng hơn -->
+            <span class="close-btn" id="close-progress-modal">×</span>
+            <h3 id="modal-topic-title">Chi tiết tiến độ</h3>
+            <div id="modal-progress-history" class="progress-history-container">
+                <!-- JS sẽ điền lịch sử trao đổi vào đây -->
+            </div>
+            <!-- Form nhận xét sẽ được tạo bởi JS -->
+        </div>
+    </div>
+    
+        <!-- Modal để chỉnh sửa đề tài -->
+    <div id="edit-topic-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" id="close-edit-modal">×</span>
+                <h3>Chỉnh sửa đề tài</h3>
+                <form id="edit-topic-form">
+                    <input type="hidden" id="edit-topic-id">
+                    <div class="form-group">
+                        <label for="edit-topic-title">Tên đề tài</label>
+                        <input type="text" id="edit-topic-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-topic-description">Mô tả chi tiết</label>
+                        <textarea id="edit-topic-description" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Lưu thay đổi</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Khu vực này chỉ hiển thị cho Sinh viên -->
+        <section id="student-section" class="hidden">
+            <h3>Đề tài của tôi</h3>
+            <div id="my-registration-status">
+                <!-- JavaScript sẽ hiển thị các đề tài sinh viên đã đăng ký ở đây -->
+            </div>
+
+             <div id="progress-section" class="hidden">
+        <hr>
+        <h4>Trao đổi tiến độ</h4>
+        <!-- Vùng hiển thị lịch sử trao đổi -->
+        <div id="progress-history" class="progress-history-container"></div>
+        
+        <!-- Form để nộp tiến độ mới -->
+        <form id="progress-form">
+            <div class="form-group">
+                <label for="progress-content">Nội dung cập nhật mới:</label>
+                <textarea id="progress-content" name="content" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="progress-image">File ảnh đính kèm:</label>
+                <input type="file" id="progress-image" accept="image/*">
+            </div>
+            <button type="submit" class="btn">Gửi cập nhật</button>
+        </form>
+    </div>
+        </section>
+        
+        <hr>
+
+        <!-- Khu vực hiển thị danh sách tất cả đề tài -->
+        <section class="topics-section" id="topics-section">
+            <h3>Danh sách đề tài có sẵn</h3>
+            <div id="topics-list">
+                <!-- JavaScript sẽ đổ dữ liệu các đề tài từ API vào đây -->
+                <!-- Ví dụ về cấu trúc một đề tài:
+                <div class="topic-card">
+                    <h4>Tên đề tài mẫu</h4>
+                    <p class="lecturer">GVHD: Nguyễn Văn A</p>
+                    <p>Đây là mô tả cho đề tài mẫu...</p>
+                    <button class="btn" data-topic-id="1">Đăng ký</button>
+                </div>
+                -->
+            </div>
+        </section>
+
+
+        <!-- Khu vực hiển thị thông báo real-time -->
+        <aside id="notifications" class="notifications-container"></aside>
+
+    </main>
+
+    <!-- Thư viện Socket.IO client -->
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    
+    <!-- Các file JS tùy chỉnh -->
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/socket-client.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

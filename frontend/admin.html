@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý người dùng</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <h1>Bảng quản trị</h1>
+            <a href="index.html" class="btn">Về trang chủ</a>
+        </div>
+    </header>
+    <main class="container">
+        <h2>Danh sách người dùng</h2>
+        <button id="create-user-btn" class="btn">Tạo người dùng mới</button>
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên đăng nhập</th>
+                    <th>Họ và Tên</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="user-list-body">
+                <!-- JS sẽ điền dữ liệu vào đây -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Modal cho việc Tạo/Sửa người dùng -->
+    <div id="user-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <h3 id="modal-title">Tạo người dùng mới</h3>
+            <form id="user-form">
+                <input type="hidden" id="user-id">
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group" id="password-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password">
+                    <small>Để trống nếu không muốn thay đổi</small>
+                </div>
+                <div class="form-group">
+                    <label for="fullName">Họ và Tên</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Vai trò</label>
+                    <select id="role" required>
+                        <option value="student">Sinh viên</option>
+                        <option value="lecturer">Giảng viên</option>
+                        <option value="admin">Quản trị viên</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Lưu thay đổi</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
